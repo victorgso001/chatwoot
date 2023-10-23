@@ -21,10 +21,8 @@
     <div class="reply-box__top">
       <reply-to-message
         v-if="shouldShowReplyToMessage"
-        :message-id="inReplyTo.id"
-        :message-content="inReplyTo.content"
+        :message="inReplyTo"
         @dismiss="resetReplyToMessage"
-        @navigate-to-message="navigateToMessage"
       />
       <canned-response
         v-if="showMentions && hasSlashCommand"
@@ -524,6 +522,7 @@ export default {
       }
 
       this.setCCAndToEmailsFromLastChat();
+      this.fetchAndSetReplyTo();
     },
     conversationIdByRoute(conversationId, oldConversationId) {
       if (conversationId !== oldConversationId) {
@@ -769,6 +768,7 @@ export default {
         : this.$track(CONVERSATION_EVENTS.SENT_MESSAGE, {
             channelType: this.channelType,
             signatureEnabled: this.sendWithSignature,
+            hasReplyTo: !!this.inReplyTo?.id,
           });
     },
     async onSendReply() {
@@ -964,6 +964,19 @@ export default {
         (item, index) => itemIndex !== index
       );
     },
+    setReplyToInPayload(payload) {
+      if (this.inReplyTo?.id) {
+        return {
+          ...payload,
+          contentAttributes: {
+            ...payload.contentAttributes,
+            in_reply_to: this.inReplyTo.id,
+          },
+        };
+      }
+
+      return payload;
+    },
     getMessagePayloadForWhatsapp(message) {
       const multipleMessagePayload = [];
 
@@ -973,41 +986,41 @@ export default {
           const attachedFile = this.globalConfig.directUploadsEnabled
             ? attachment.blobSignedId
             : attachment.resource.file;
-          const attachmentPayload = {
+          let attachmentPayload = {
             conversationId: this.currentChat.id,
             files: [attachedFile],
             private: false,
             message: caption,
             sender: this.sender,
           };
+
+          attachmentPayload = this.setReplyToInPayload(attachmentPayload);
           multipleMessagePayload.push(attachmentPayload);
           caption = '';
         });
       } else {
-        const messagePayload = {
+        let messagePayload = {
           conversationId: this.currentChat.id,
           message,
           private: false,
           sender: this.sender,
         };
+
+        messagePayload = this.setReplyToInPayload(messagePayload);
+
         multipleMessagePayload.push(messagePayload);
       }
 
       return multipleMessagePayload;
     },
     getMessagePayload(message) {
-      const messagePayload = {
+      let messagePayload = {
         conversationId: this.currentChat.id,
         message,
         private: this.isPrivate,
         sender: this.sender,
       };
-
-      if (this.inReplyTo?.id) {
-        messagePayload.contentAttributes = {
-          in_reply_to: this.inReplyTo.id,
-        };
-      }
+      messagePayload = this.setReplyToInPayload(messagePayload);
 
       if (this.attachedFiles && this.attachedFiles.length) {
         messagePayload.files = [];
@@ -1086,7 +1099,7 @@ export default {
         this.conversationId
       );
 
-      this.inReplyTo = this.currentChat.messages.find(message => {
+      this.inReplyTo = this.currentChat?.messages?.find(message => {
         if (message.id === replyToMessageId) {
           return true;
         }
@@ -1097,11 +1110,6 @@ export default {
       const replyStorageKey = LOCAL_STORAGE_KEYS.MESSAGE_REPLY_TO;
       LocalStorage.deleteFromJsonStore(replyStorageKey, this.conversationId);
       bus.$emit(BUS_EVENTS.TOGGLE_REPLY_TO_MESSAGE);
-    },
-    navigateToMessage(messageId) {
-      this.$nextTick(() => {
-        bus.$emit(BUS_EVENTS.SCROLL_TO_MESSAGE, { messageId });
-      });
     },
     onNewConversationModalActive(isActive) {
       // Issue is if the new conversation modal is open and we drag and drop the file
