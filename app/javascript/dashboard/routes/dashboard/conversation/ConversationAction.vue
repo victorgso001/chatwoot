@@ -72,6 +72,24 @@
         @click="onClickAssignPriority"
       />
     </div>
+    <div class="multiselect-wrap--small">
+      <contact-details-item compact title="Test" />
+      <multiselect-dropdown
+        :options="priorityOptions"
+        :selected-item="assignedPriority"
+        multiselector-title="Test"
+        :multiselect-placeholder="
+          $t('CONVERSATION.PRIORITY.CHANGE_PRIORITY.SELECT_PLACEHOLDER')
+        "
+        :no-search-result="
+          $t('CONVERSATION.PRIORITY.CHANGE_PRIORITY.NO_RESULTS')
+        "
+        :input-placeholder="
+          $t('CONVERSATION.PRIORITY.CHANGE_PRIORITY.INPUT_PLACEHOLDER')
+        "
+        @click="onClickAssignPriority"
+      />
+    </div>
     <contact-details-item
       compact
       :title="$t('CONVERSATION_SIDEBAR.ACCORDION.CONVERSATION_LABELS')"

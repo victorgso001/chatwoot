@@ -84,6 +84,19 @@ export default {
           },
         },
         {
+          field: 'assignedAgent',
+          key: 'test',
+          title: this.$t('CSAT_REPORTS.TABLE.HEADER.AGENT_NAME'),
+          align: this.isRTLView ? 'right' : 'left',
+          width: 200,
+          renderBodyCell: ({ row }) => {
+            if (row.assignedAgent) {
+              return <UserAvatarWithName size="24px" user="Teste0" />;
+            }
+            return '---';
+          },
+        },
+        {
           field: 'rating',
           key: 'rating',
           title: this.$t('CSAT_REPORTS.TABLE.HEADER.RATING'),
