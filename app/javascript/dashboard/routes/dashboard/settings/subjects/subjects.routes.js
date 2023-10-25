@@ -8,8 +8,8 @@ export default {
       path: frontendURL('accounts/:accountId/settings/subjects'),
       component: SettingsContent,
       props: {
-        headerTitle: 'SUBJECTS_MGMT.HEADER',
-        icon: 'code',
+        headerTitle: 'SUBJECT_MGMT.HEADER',
+        icon: 'tag',
         showNewButton: false,
       },
       children: [

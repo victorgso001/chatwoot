@@ -34,6 +34,7 @@ import inboxes from './modules/inboxes';
 import inboxMembers from './modules/inboxMembers';
 import integrations from './modules/integrations';
 import labels from './modules/labels';
+import subjects from './modules/subjects';
 import macros from './modules/macros';
 import notifications from './modules/notifications';
 import portals from './modules/helpCenterPortals';
@@ -100,6 +101,7 @@ export default new Vuex.Store({
     inboxMembers,
     integrations,
     labels,
+    subjects,
     macros,
     notifications,
     portals,

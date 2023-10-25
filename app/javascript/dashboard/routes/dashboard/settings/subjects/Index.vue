@@ -78,7 +78,7 @@
       </div>
     </div>
     <woot-modal :show.sync="showAddPopup" :on-close="hideAddPopup">
-      <add-label @close="hideAddPopup" />
+      <add-subject @close="hideAddPopup" />
     </woot-modal>
 
     <woot-modal :show.sync="showEditPopup" :on-close="hideEditPopup">
@@ -101,10 +101,15 @@
   </div>
 </template>
 <script>
+import { mapGetters } from 'vuex';
 import alertMixin from 'shared/mixins/alertMixin';
 
+import AddSubject from './AddSubject.vue';
+
 export default {
-  components: {},
+  components: {
+    AddSubject,
+  },
   mixins: [alertMixin],
   data() {
     return {
@@ -115,5 +120,71 @@ export default {
       selectedResponse: {},
     };
   },
+  computed: {
+    ...mapGetters({
+      records: 'subjects/getSubjects',
+      uiFlags: 'subjects/getUIFlags',
+    }),
+    // Delete Modal
+    deleteConfirmText() {
+      return this.$t('SUBJECT_MGMT.DELETE.CONFIRM.YES');
+    },
+    deleteRejectText() {
+      return this.$t('SUBJECT_MGMT.DELETE.CONFIRM.NO');
+    },
+    deleteMessage() {
+      return ` ${this.selectedResponse.title}?`;
+    },
+  },
+  mounted() {
+    this.$store.dispatch('subjects/get');
+  },
+  methods: {
+    openAddPopup() {
+      this.showAddPopup = true;
+    },
+    hideAddPopup() {
+      this.showAddPopup = false;
+    },
+
+    openEditPopup(response) {
+      this.showEditPopup = true;
+      this.selectedResponse = response;
+    },
+    hideEditPopup() {
+      this.showEditPopup = false;
+    },
+
+    openDeletePopup(response) {
+      this.showDeleteConfirmationPopup = true;
+      this.selectedResponse = response;
+    },
+    closeDeletePopup() {
+      this.showDeleteConfirmationPopup = false;
+    },
+
+    confirmDeletion() {
+      this.loading[this.selectedResponse.id] = true;
+      this.closeDeletePopup();
+      this.deleteLabel(this.selectedResponse.id);
+    },
+  },
 };
 </script>
+
+<style scoped lang="scss">
+@import '~dashboard/assets/scss/variables';
+
+.label-color--container {
+  @apply flex items-center;
+}
+
+.label-color--display {
+  @apply rounded h-4 w-4 mr-1 rtl:mr-0 rtl:ml-1 border border-solid border-slate-50 dark:border-slate-700;
+}
+.label-title {
+  span {
+    @apply w-60 inline-block;
+  }
+}
+</style>

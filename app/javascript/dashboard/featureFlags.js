@@ -17,5 +17,5 @@ export const FEATURE_FLAGS = {
   VOICE_RECORDER: 'voice_recorder',
   AUDIT_LOGS: 'audit_logs',
   MESSAGE_REPLY_TO: 'message_reply_to',
-  SUBJECTS: 'subjects',
+  SUBJECT: 'subjects',
 };

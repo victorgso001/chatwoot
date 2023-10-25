@@ -1,0 +1,95 @@
+{
+    "SUBJECT_MGMT": {
+      "HEADER": "Assuntos",
+      "HEADER_BTN_TXT": "Adicionar Nova Etiqueta de Assunto",
+      "LOADING": "Buscando etiquetas de assunto",
+      "SIDEBAR_TXT": "<p><b>Etiquetas de assunto</b> <p>Etiquetas de assunto de conversas.</p>",
+      "FORM": {
+        "NAME": {
+          "LABEL": "Nome do Assunto",
+          "PLACEHOLDER": "Nome do assunto",
+          "REQUIRED_ERROR": "Nome do assunto é obrigatório",
+          "MINIMUM_LENGTH_ERROR": "Um tamanho mínimo de 2 caracteres é requerido.",
+          "VALID_ERROR": "Somente caracteres alfanuméricos, hífens e sublinhados são permitidos."
+        },
+        "DESCRIPTION": {
+          "LABEL": "Descrição",
+          "PLACEHOLDER": "Descrição da Etiqueta de Assunto"
+        },
+        "COLOR": {
+          "LABEL": "Cor"
+        },
+        "SHOW_ON_SIDEBAR": {
+          "LABEL": "Mostrar assunto na barra lateral"
+        },
+        "EDIT": "Editar",
+        "CREATE": "Criar",
+        "DELETE": "Excluir",
+        "CANCEL": "Cancelar"
+      },
+      "ADD": {
+        "TITLE": "Adicionar nova etiqueta de assunto",
+        "SUBMIT": "Submit",
+        "DESC": "Etiquetas de Assuntos possibilitam a organização por tipo de assunto.",
+        "CANCEL_BUTTON_TEXT": "Cancelar",
+        "FORM": {
+          "NAME": {
+            "LABEL": "Nome de exibição",
+            "PLACEHOLDER": "Insira nome de exibição do assunto",
+            "ERROR": "Campo nome é requerido"
+          },
+          "MODEL": {
+            "LABEL": "Aplica-se a",
+            "PLACEHOLDER": "Por favor, selecione um",
+            "ERROR": "Modelo é obrigatório"
+          },
+          "TYPE": {
+            "LABEL": "Tipo",
+            "PLACEHOLDER": "Por favor, selecione um tipo",
+            "ERROR": "Tipo é obrigatório",
+            "LIST": {
+              "LABEL": "Listar assuntos",
+              "PLACEHOLDER": "Por favor, insira um assunto e aperte enter",
+              "ERROR": "Precisa ter no mínimo um assunto"
+            }
+          },
+          "KEY": {
+            "LABEL": "Registro",
+            "PLACEHOLDER": "Entre com número de registro do assunto",
+            "ERROR": "Registro é obrigatório",
+            "IN_VALID": "Registro inválido"
+          }
+        },
+        "API": {
+          "SUCCESS_MESSAGE": "Etiqueta de assunto adicionada com sucesso!",
+          "ERROR_MESSAGE": "Não foi possível criar a etiqueta de assunto. Por favor, tente novamente mais tarde."
+        }
+      },
+      "LIST": {
+        "404": "Não existem etiquetas de assunto associadas a esta conta",
+        "TITLE": "Gerencie etiquetas de assunto do seu time",
+        "DESC": "Você pode adicionar/excluir etiquetas de assunto para/por seu time.",
+        "NAME": "Nome",
+        "EMAIL": "EMAIL",
+        "STATUS": "Status",
+        "ACTIONS": "Ações",
+        "VERIFIED": "Verificado",
+        "VERIFICATION_PENDING": "Verificação pendente"
+      },
+      "DELETE": {
+        "BUTTON_TEXT": "Excluir",
+        "API": {
+          "SUCCESS_MESSAGE": "Etiqueta de assunto excluída com sucesso.",
+          "ERROR_MESSAGE": "Não foi possível excluir a etiqueta de assunto. Por favor, tente novamente mais tarde."
+        },
+        "CONFIRM": {
+          "TITLE": "Você tem certeza que quer excluir - %{subjectName}",
+          "PLACE_HOLDER": "Por favor, digite {subjectName} para confirmar",
+          "MESSAGE": "Excluir vai remover esta etiqueta de assunto",
+          "YES": "Excluir ",
+          "NO": "Cancelar"
+        }
+      }
+    }
+  }
+  
