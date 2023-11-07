@@ -51,6 +51,7 @@
 
 class Conversation < ApplicationRecord
   include Labelable
+  include Subjectable
   include AssignmentHandler
   include AutoAssignmentHandler
   include ActivityMessageHandler
@@ -242,8 +243,8 @@ class Conversation < ApplicationRecord
 
   def allowed_keys?
     (
-      previous_changes.keys.intersect?(%w[team_id assignee_id status snoozed_until custom_attributes label_list waiting_since first_reply_created_at
-                                          priority]) ||
+      previous_changes.keys.intersect?(%w[team_id assignee_id status snoozed_until custom_attributes label_list subject_list waiting_since
+                                          first_reply_created_at priority]) ||
       (previous_changes['additional_attributes'].present? && previous_changes['additional_attributes'][1].keys.intersect?(%w[conversation_language]))
     )
   end
@@ -290,6 +291,18 @@ class Conversation < ApplicationRecord
 
     create_label_added(user_name, current_labels - previous_labels)
     create_label_removed(user_name, previous_labels - current_labels)
+  end
+
+  def create_subject_change(user_name)
+    return unless user_name
+
+    previous_subjects, current_subjects = previous_changes[:subject_list]
+    return unless (previous_subjects.is_a? Array) && (current_subjects.is_a? Array)
+
+    dispatcher_dispatch(CONVERSATION_UPDATED, previous_changes)
+
+    create_subject_added(user_name, current_subjects - previous_subjects)
+    create_subject_removed(user_name, previous_subjects - current_subjects)
   end
 
   def validate_referer_url

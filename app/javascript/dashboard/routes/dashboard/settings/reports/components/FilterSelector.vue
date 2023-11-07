@@ -25,6 +25,10 @@
         v-if="showLabelsFilter"
         @labels-filter-selection="handleLabelsFilterSelection"
       />
+      <reports-filters-subjects
+        v-if="showLabelsFilter"
+        @subjects-filter-selection="handleLabelsFilterSelection"
+      />
       <reports-filters-teams
         v-if="showTeamFilter"
         @team-filter-selection="handleTeamFilterSelection"
@@ -54,6 +58,7 @@ import ReportsFiltersDateRange from './Filters/DateRange.vue';
 import ReportsFiltersDateGroupBy from './Filters/DateGroupBy.vue';
 import ReportsFiltersAgents from './Filters/Agents.vue';
 import ReportsFiltersLabels from './Filters/Labels.vue';
+import ReportsFiltersSubjects from './Filters/Subjects.vue';
 import ReportsFiltersInboxes from './Filters/Inboxes.vue';
 import ReportsFiltersTeams from './Filters/Teams.vue';
 import ReportsFiltersRatings from './Filters/Ratings.vue';
@@ -68,6 +73,7 @@ export default {
     ReportsFiltersDateGroupBy,
     ReportsFiltersAgents,
     ReportsFiltersLabels,
+    ReportsFiltersSubjects,
     ReportsFiltersInboxes,
     ReportsFiltersTeams,
     ReportsFiltersRatings,
@@ -86,6 +92,10 @@ export default {
       default: false,
     },
     showLabelsFilter: {
+      type: Boolean,
+      default: false,
+    },
+    showSubjectsFilter: {
       type: Boolean,
       default: false,
     },
@@ -112,6 +122,7 @@ export default {
       selectedDateRange: DATE_RANGE_OPTIONS.LAST_7_DAYS,
       selectedGroupByFilter: null,
       selectedLabel: null,
+      selectedSubject: null,
       selectedInbox: null,
       selectedTeam: null,
       selectedRating: null,
@@ -176,6 +187,7 @@ export default {
         businessHoursSelected: businessHours,
         selectedAgents,
         selectedLabel,
+        selectedSubject,
         selectedInbox,
         selectedTeam,
         selectedRating,
@@ -187,6 +199,7 @@ export default {
         businessHours,
         selectedAgents,
         selectedLabel,
+        selectedSubject,
         selectedInbox,
         selectedTeam,
         selectedRating,
@@ -212,6 +225,10 @@ export default {
     },
     handleLabelsFilterSelection(selectedLabel) {
       this.selectedLabel = selectedLabel;
+      this.emitChange();
+    },
+    handleSubjectsFilterSelection(selectedSubject) {
+      this.selectedSubject = selectedSubject;
       this.emitChange();
     },
     handleInboxFilterSelection(selectedInbox) {

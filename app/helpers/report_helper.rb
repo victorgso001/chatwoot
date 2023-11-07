@@ -11,6 +11,8 @@ module ReportHelper
       user
     when :label
       label
+    when :subject
+      subject
     when :team
       team
     end

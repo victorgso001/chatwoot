@@ -59,6 +59,8 @@ Metrics/ModuleLength:
   Exclude:
     - lib/seeders/message_seeder.rb
     - spec/support/slack_stubs.rb
+    - app/models/concerns/activity_message_handler.rb
+    - app/presenters/conversations/event_data_presenter.rb
 Rails/ApplicationController:
   Exclude:
     - 'app/controllers/api/v1/widget/messages_controller.rb'
@@ -106,6 +108,7 @@ Metrics/MethodLength:
   Exclude:
     - 'db/migrate/20161123131628_devise_token_auth_create_users.rb'
     - 'db/migrate/20211219031453_update_foreign_keys_on_delete.rb'
+    - app/presenters/conversations/event_data_presenter.rb
 Rails/CreateTableWithTimestamps:
   Exclude:
     - 'db/migrate/20170207092002_acts_as_taggable_on_migration.acts_as_taggable_on_engine.rb'

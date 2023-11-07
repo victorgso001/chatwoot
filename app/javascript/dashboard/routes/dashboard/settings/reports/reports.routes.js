@@ -1,6 +1,7 @@
 import Index from './Index';
 import AgentReports from './AgentReports';
 import LabelReports from './LabelReports';
+import SubjectReports from './SubjectReports';
 import InboxReports from './InboxReports';
 import TeamReports from './TeamReports';
 import CsatResponses from './CsatResponses';
@@ -96,6 +97,23 @@ export default {
           name: 'label_reports',
           roles: ['administrator'],
           component: LabelReports,
+        },
+      ],
+    },
+    {
+      path: frontendURL('accounts/:accountId/reports'),
+      component: SettingsContent,
+      props: {
+        headerTitle: 'SUBJECT_REPORTS.HEADER',
+        icon: 'tag',
+        keepAlive: false,
+      },
+      children: [
+        {
+          path: 'subject',
+          name: 'subject_reports',
+          roles: ['administrator'],
+          component: SubjectReports,
         },
       ],
     },

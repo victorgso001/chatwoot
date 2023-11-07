@@ -1,0 +1,96 @@
+{
+    "SUBJECT_MGMT": {
+      "HEADER": "Subjects",
+      "HEADER_BTN_TXT": "Add Chat Subject Label",
+      "LOADING": "Fetching subject labels",
+      "SIDEBAR_TXT": "<p><b>Subject Labels</b> <p>A subject label for conversation purpose.</p>",
+      "FORM": {
+        "NAME": {
+          "LABEL": "Subject Name",
+          "PLACEHOLDER": "Subject name",
+          "REQUIRED_ERROR": "Subject name is required",
+          "MINIMUM_LENGTH_ERROR": "Minimum length 2 is required",
+          "VALID_ERROR": "Only Alphabets, Numbers, Hyphen and Underscore are allowed"
+        },
+        "DESCRIPTION": {
+          "LABEL": "Description",
+          "PLACEHOLDER": "Subject Description"
+        },
+        "COLOR": {
+          "LABEL": "Color"
+        },
+        "SHOW_ON_SIDEBAR": {
+          "LABEL": "Show subject on sidebar"
+        },
+        "EDIT": "Edit",
+        "CREATE": "Create",
+        "DELETE": "Delete",
+        "CANCEL": "Cancel"
+      },
+      "ADD": {
+        "TITLE": "Add Subject Label",
+        "SUBMIT": "Submit",
+        "DESC": "Subjects allows grouping by conversation topics.",
+        "CANCEL_BUTTON_TEXT": "Cancel",
+        "FORM": {
+          "NAME": {
+            "LABEL": "Display Name",
+            "PLACEHOLDER": "Enter subject label display name",
+            "ERROR": "Name is required"
+          },
+          "MODEL": {
+            "LABEL": "Applies to",
+            "PLACEHOLDER": "Please select one",
+            "ERROR": "Model is required"
+          },
+          "TYPE": {
+            "LABEL": "Type",
+            "PLACEHOLDER": "Please select a type",
+            "ERROR": "Type is required",
+            "LIST": {
+              "LABEL": "List Values",
+              "PLACEHOLDER": "Please enter value and press enter key",
+              "ERROR": "Must have at least one value"
+            }
+          },
+          "KEY": {
+            "LABEL": "Key",
+            "PLACEHOLDER": "Enter subject label key",
+            "ERROR": "Key is required",
+            "IN_VALID": "Invalid Key"
+          }
+        },
+        "API": {
+          "SUCCESS_MESSAGE": "Subject Label added successfully!",
+          "ERROR_MESSAGE": "Could not create a Subject Label. Please try again later."
+        }
+      },
+      "LIST": {
+        "404": "There are no subject labels associated to this account",
+        "TITLE": "Manage subject labels in your team",
+        "DESC": "You can add/remove subject labels to/in your team.",
+        "NAME": "Name",
+        "EMAIL": "EMAIL",
+        "STATUS": "Status",
+        "ACTIONS": "Actions",
+        "VERIFIED": "Verified",
+        "VERIFICATION_PENDING": "Verification Pending",
+        "TABLE_HEADER": ["Name", "Description", "Color"]
+      },
+      "DELETE": {
+        "BUTTON_TEXT": "Delete",
+        "API": {
+          "SUCCESS_MESSAGE": "Subject Label deleted successfully.",
+          "ERROR_MESSAGE": "Couldn't delete the subject label. Try again."
+        },
+        "CONFIRM": {
+          "TITLE": "Are you sure want to delete - %{subjectName}",
+          "PLACE_HOLDER": "Please type {subjectName} to confirm",
+          "MESSAGE": "Deleting will remove the subject label",
+          "YES": "Delete ",
+          "NO": "Cancel"
+        }
+      }
+    }
+  }
+  

@@ -17,12 +17,14 @@
       :account-id="accountId"
       :inboxes="inboxes"
       :labels="labels"
+      :subjects="subjects"
       :teams="teams"
       :custom-views="customViews"
       :menu-config="activeSecondaryMenu"
       :current-role="currentRole"
       :is-on-chatwoot-cloud="isOnChatwootCloud"
       @add-label="showAddLabelPopup"
+      @add-subject="showAddSubjectPopup"
       @toggle-accounts="toggleAccountModal"
     />
   </aside>
@@ -80,6 +82,7 @@ export default {
       isFeatureEnabledonAccount: 'accounts/isFeatureEnabledonAccount',
       isOnChatwootCloud: 'globalConfig/isOnChatwootCloud',
       labels: 'labels/getLabelsOnSidebar',
+      subjects: 'subjects/getSubjectsOnSidebar',
       teams: 'teams/getMyTeams',
     }),
     activeCustomView() {
@@ -154,6 +157,7 @@ export default {
   },
   mounted() {
     this.$store.dispatch('labels/get');
+    this.$store.dispatch('subjects/get');
     this.$store.dispatch('inboxes/get');
     this.$store.dispatch('notifications/unReadCount');
     this.$store.dispatch('teams/get');
@@ -210,6 +214,9 @@ export default {
     },
     showAddLabelPopup() {
       this.$emit('show-add-label-popup');
+    },
+    showAddSubjectPopup() {
+      this.$emit('show-add-subject-popup');
     },
     openNotificationPanel() {
       this.$emit('open-notification-panel');

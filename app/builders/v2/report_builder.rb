@@ -78,6 +78,10 @@ class V2::ReportBuilder
     @label ||= account.labels.find(params[:id])
   end
 
+  def subject
+    @subject ||= account.subjects.find(params[:id])
+  end
+
   def team
     @team ||= account.teams.find(params[:id])
   end

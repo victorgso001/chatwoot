@@ -6,10 +6,12 @@ import { REPLY_EDITOR_MODES } from 'dashboard/components/widgets/WootWriter/cons
 import aiMixin from 'dashboard/mixins/aiMixin';
 import {
   ICON_ADD_LABEL,
+  ICON_ADD_SUBJECT,
   ICON_ASSIGN_AGENT,
   ICON_ASSIGN_PRIORITY,
   ICON_ASSIGN_TEAM,
   ICON_REMOVE_LABEL,
+  ICON_REMOVE_SUBJECT,
   ICON_PRIORITY_URGENT,
   ICON_PRIORITY_HIGH,
   ICON_PRIORITY_LOW,
@@ -44,6 +46,9 @@ export default {
       this.setCommandbarData();
     },
     activeLabels() {
+      this.setCommandbarData();
+    },
+    activeSubjects() {
       this.setCommandbarData();
     },
     draftMessage() {
@@ -236,6 +241,55 @@ export default {
       ]);
     },
 
+    addSubjectActions() {
+      const availableSubjects = this.inactiveSubjects.map(subject => ({
+        id: subject.title,
+        title: `#${subject.title}`,
+        parent: 'add_a_subject_to_the_conversation',
+        section: this.$t('COMMAND_BAR.SECTIONS.ADD_SUBJECT'),
+        icon: ICON_ADD_SUBJECT,
+        handler: action => this.addSubjectToConversation({ title: action.id }),
+      }));
+      return [
+        ...availableSubjects,
+        {
+          id: 'add_a_subject_to_the_conversation',
+          title: this.$t('COMMAND_BAR.COMMANDS.ADD_SUBJECTS_TO_CONVERSATION'),
+          section: this.$t('COMMAND_BAR.SECTIONS.CONVERSATION'),
+          icon: ICON_ADD_SUBJECT,
+          children: this.inactiveSubjects.map(subject => subject.title),
+        },
+      ];
+    },
+    removeSubjectActions() {
+      const activeSubjects = this.activeSubjects.map(subject => ({
+        id: subject.title,
+        title: `#${subject.title}`,
+        parent: 'remove_a_subject_to_the_conversation',
+        section: this.$t('COMMAND_BAR.SECTIONS.REMOVE_SUBJECT'),
+        icon: ICON_REMOVE_SUBJECT,
+        handler: action => this.removeSubjectFromConversation(action.id),
+      }));
+      return [
+        ...activeSubjects,
+        {
+          id: 'remove_a_subject_to_the_conversation',
+          title: this.$t(
+            'COMMAND_BAR.COMMANDS.REMOVE_SUBJECT_FROM_CONVERSATION'
+          ),
+          section: this.$t('COMMAND_BAR.SECTIONS.CONVERSATION'),
+          icon: ICON_REMOVE_SUBJECT,
+          children: this.activeSubjects.map(subject => subject.title),
+        },
+      ];
+    },
+    subjectActions() {
+      if (this.activeSubjects.length) {
+        return [...this.addSubjectActions, ...this.removeSubjectActions];
+      }
+      return this.addSubjectActions;
+    },
+
     nonDraftMessageAIAssistActions() {
       if (this.replyMode === REPLY_EDITOR_MODES.REPLY) {
         return [
@@ -332,6 +386,7 @@ export default {
           ...this.assignAgentActions,
           ...this.assignTeamActions,
           ...this.labelActions,
+          ...this.subjectActions,
           ...this.assignPriorityActions,
         ];
         if (this.isAIIntegrationEnabled) {

@@ -49,7 +49,9 @@
     "REPLY_MESSAGE_NOT_FOUND": "Mensagem não disponível",
     "CARD": {
       "SHOW_LABELS": "Mostrar rótulos",
-      "HIDE_LABELS": "Ocultar os rótulos"
+      "HIDE_LABELS": "Ocultar os rótulos",
+      "SHOW_SUBJECTS": "Mostrar assuntos",
+      "HIDE_SUBJECTS": "Ocultar os assuntos"
     },
     "HEADER": {
       "RESOLVE_ACTION": "Resolver",
@@ -108,6 +110,7 @@
       },
       "ASSIGN_AGENT": "Atribuir Agente",
       "ASSIGN_LABEL": "Atribuir etiqueta",
+      "ASSIGN_SUBJECT": "Atribuir assunto",
       "AGENTS_LOADING": "Carregando agentes...",
       "ASSIGN_TEAM": "Atribuir equipe",
       "API": {
@@ -118,6 +121,10 @@
         "LABEL_ASSIGNMENT": {
           "SUCCESFUL": "Etiqueta #%{labelName} atribuída para o id de conversa %{conversationId}",
           "FAILED": "Não foi possível atribuir etiqueta. Por favor, tente novamente."
+        },
+        "SUBJECT_ASSIGNMENT": {
+          "SUCCESFUL": "Assunto #%{subjectName} atribuído para o id de conversa %{conversationId}",
+          "FAILED": "Não foi possível atribuir assunto. Por favor, tente novamente."
         },
         "TEAM_ASSIGNMENT": {
           "SUCCESFUL": "Equipe %{team} atribuído para o id de conversa %{conversationId}",
@@ -181,6 +188,8 @@
     "CHANGE_AGENT_FAILED": "Falha ao atribuir outro agente",
     "ASSIGN_LABEL_SUCCESFUL": "Etiqueta atribuída com sucesso",
     "ASSIGN_LABEL_FAILED": "Falha ao atribuir etiqueta",
+    "ASSIGN_SUBJECT_SUCCESFUL": "Assunto atribuído com sucesso",
+    "ASSIGN_SUBJECT_FAILED": "Falha ao atribuir assunto",
     "CHANGE_TEAM": "Estado da conversa mudou",
     "FILE_SIZE_LIMIT": "O arquivo excede os {MAXIMUM_SUPPORTED_FILE_UPLOAD_SIZE} MB do limite para anexos",
     "MESSAGE_ERROR": "Não foi possível enviar esta mensagem, por favor, tente novamente mais tarde",
@@ -248,6 +257,11 @@
       "TITLE": "Organizar conversas com marcadores",
       "DESCRIPTION": "Etiquetas fornecem uma forma mais fácil de organizar a sua conversa. Criar algumas estiquetas como #solicitação-suporte, #fatura-assunto etc., assim você poderá futuramente utiliza-las em uma conversa posteriormente.",
       "NEW_LINK": "Clique aqui para criar marcadores"
+    },
+    "SUBJECTS": {
+      "TITLE": "Organizar conversas com assuntos",
+      "DESCRIPTION": "Assuntos fornecem uma forma mais fácil de organizar a sua conversa. Criar alguns assuntos como #configuracao-roteador, #fatura etc., assim você poderá futuramente utiliza-las em uma conversa posteriormente.",
+      "NEW_LINK": "Clique aqui para criar assuntos"
     }
   },
   "CONVERSATION_SIDEBAR": {

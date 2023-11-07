@@ -18,6 +18,7 @@ import contactLabels from './modules/contactLabels';
 import contactNotes from './modules/contactNotes';
 import contacts from './modules/contacts';
 import conversationLabels from './modules/conversationLabels';
+import conversationSubjects from './modules/conversationSubjects';
 import conversationMetadata from './modules/conversationMetadata';
 import conversationPage from './modules/conversationPage';
 import conversations from './modules/conversations';
@@ -34,6 +35,7 @@ import inboxes from './modules/inboxes';
 import inboxMembers from './modules/inboxMembers';
 import integrations from './modules/integrations';
 import labels from './modules/labels';
+import subjects from './modules/subjects';
 import macros from './modules/macros';
 import notifications from './modules/notifications';
 import portals from './modules/helpCenterPortals';
@@ -84,6 +86,7 @@ export default new Vuex.Store({
     contactNotes,
     contacts,
     conversationLabels,
+    conversationSubjects,
     conversationMetadata,
     conversationPage,
     conversations,
@@ -100,6 +103,7 @@ export default new Vuex.Store({
     inboxMembers,
     integrations,
     labels,
+    subjects,
     macros,
     notifications,
     portals,

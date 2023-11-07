@@ -58,6 +58,7 @@ class Account < ApplicationRecord
   has_many :hooks, dependent: :destroy_async, class_name: 'Integrations::Hook'
   has_many :inboxes, dependent: :destroy_async
   has_many :labels, dependent: :destroy_async
+  has_many :subjects, dependent: :destroy_async
   has_many :line_channels, dependent: :destroy_async, class_name: '::Channel::Line'
   has_many :mentions, dependent: :destroy_async
   has_many :messages, dependent: :destroy_async
@@ -99,6 +100,16 @@ class Account < ApplicationRecord
     conversation_ids = conversations.pluck(:id)
     ActsAsTaggableOn::Tagging.includes(:tag)
                              .where(context: 'labels',
+                                    taggable_type: 'Conversation',
+                                    taggable_id: conversation_ids)
+                             .map { |_| _.tag.name }
+  end
+
+  def all_conversation_subjects
+    # returns array of tags
+    conversation_ids = conversations.pluck(:id)
+    ActsAsTaggableOn::Tagging.includes(:tag)
+                             .where(context: 'subjects',
                                     taggable_type: 'Conversation',
                                     taggable_id: conversation_ids)
                              .map { |_| _.tag.name }

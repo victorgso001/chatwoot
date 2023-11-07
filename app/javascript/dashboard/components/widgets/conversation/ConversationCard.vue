@@ -87,6 +87,7 @@
         </span>
       </div>
       <card-labels :conversation-id="chat.id" />
+      <card-subjects :conversation-id="chat.id" />
     </div>
     <woot-context-menu
       v-if="showContextMenu"
@@ -103,6 +104,7 @@
         @update-conversation="onUpdateConversation"
         @assign-agent="onAssignAgent"
         @assign-label="onAssignLabel"
+        @assign-subject="onAssignSubject"
         @assign-team="onAssignTeam"
         @mark-as-unread="markAsUnread"
         @assign-priority="assignPriority"
@@ -124,11 +126,13 @@ import ConversationContextMenu from './contextMenu/Index.vue';
 import alertMixin from 'shared/mixins/alertMixin';
 import TimeAgo from 'dashboard/components/ui/TimeAgo.vue';
 import CardLabels from './conversationCardComponents/CardLabels.vue';
+import CardSubjects from './conversationCardComponents/CardSubjects.vue';
 import PriorityMark from './PriorityMark.vue';
 
 export default {
   components: {
     CardLabels,
+    CardSubjects,
     InboxName,
     Thumbnail,
     ConversationContextMenu,
@@ -140,6 +144,10 @@ export default {
   mixins: [inboxMixin, timeMixin, conversationMixin, alertMixin],
   props: {
     activeLabel: {
+      type: String,
+      default: '',
+    },
+    activeSubject: {
       type: String,
       default: '',
     },
@@ -258,6 +266,7 @@ export default {
           activeInbox,
           id: chat.id,
           label: this.activeLabel,
+          subject: this.activeSubject,
           teamId: this.teamId,
           foldersId: this.foldersId,
           conversationType: this.conversationType,
@@ -316,6 +325,10 @@ export default {
     },
     async onAssignLabel(label) {
       this.$emit('assign-label', [label.title], [this.chat.id]);
+      this.closeContextMenu();
+    },
+    async onAssignSubject(subject) {
+      this.$emit('assign-subject', [subject.title], [this.chat.id]);
       this.closeContextMenu();
     },
     async onAssignTeam(team) {

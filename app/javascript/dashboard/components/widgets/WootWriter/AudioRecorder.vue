@@ -19,7 +19,6 @@ import encoderWorker from 'opus-recorder/dist/encoderWorker.min';
 import waveWorker from 'opus-recorder/dist/waveWorker.min';
 
 import WaveSurfer from 'wavesurfer.js';
-import MicrophonePlugin from 'wavesurfer.js/dist/plugin/wavesurfer.microphone.js';
 
 import 'videojs-wavesurfer/dist/videojs.wavesurfer.js';
 import 'videojs-record/dist/videojs.record.js';
@@ -28,8 +27,6 @@ import OpusRecorderEngine from 'videojs-record/dist/plugins/videojs.record.opus-
 
 import { format, addSeconds } from 'date-fns';
 import { AUDIO_FORMATS } from 'shared/constants/messages';
-
-WaveSurfer.microphone = MicrophonePlugin;
 
 export default {
   name: 'WootAudioRecorder',

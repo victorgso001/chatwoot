@@ -10,6 +10,7 @@ module ActivityMessageHandler
     status_change_activity(user_name) if saved_change_to_status?
     priority_change_activity(user_name) if saved_change_to_priority?
     create_label_change(activity_message_ownner(user_name)) if saved_change_to_label_list?
+    create_subject_change(activity_message_ownner(user_name)) if saved_change_to_subject_list?
   end
 
   def status_change_activity(user_name)
@@ -18,7 +19,6 @@ module ActivityMessageHandler
               else
                 user_status_change_activity_content(user_name)
               end
-
     ::Conversations::ActivityMessageJob.perform_later(self, activity_message_params(content)) if content
   end
 
@@ -60,6 +60,21 @@ module ActivityMessageHandler
     ::Conversations::ActivityMessageJob.perform_later(self, activity_message_params(content)) if content
   end
 
+  def create_subject_added(user_name, subjects = [])
+    create_subject_change_activity('added', user_name, subjects)
+  end
+
+  def create_subject_removed(user_name, subjects = [])
+    create_subject_change_activity('removed', user_name, subjects)
+  end
+
+  def create_subject_change_activity(change_type, user_name, subjects = [])
+    return unless subjects.size.positive?
+
+    content = I18n.t("conversations.activity.subjects.#{change_type}", user_name: user_name, subjects: subjects.join(', '))
+    ::Conversations::ActivityMessageJob.perform_later(self, activity_message_params(content)) if content
+  end
+
   def create_muted_message
     create_mute_change_activity('muted')
   end
@@ -95,7 +110,6 @@ module ActivityMessageHandler
     params = { assignee_name: assignee&.name, team_name: team&.name, user_name: user_name }
     params[:team_name] = generate_team_name_for_activity if key == 'removed'
     content = I18n.t("conversations.activity.team.#{key}", **params)
-
     ::Conversations::ActivityMessageJob.perform_later(self, activity_message_params(content)) if content
   end
 
@@ -108,7 +122,6 @@ module ActivityMessageHandler
 
   def create_assignee_change_activity(user_name)
     user_name = activity_message_ownner(user_name)
-
     return unless user_name
 
     content = generate_assignee_change_activity_content(user_name)

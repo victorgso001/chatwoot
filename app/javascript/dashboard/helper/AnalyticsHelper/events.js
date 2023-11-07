@@ -28,6 +28,13 @@ export const LABEL_EVENTS = Object.freeze({
   APPLY_LABEL: 'Applied a label',
 });
 
+export const SUBJECT_EVENTS = Object.freeze({
+  CREATE: 'Created a subject',
+  UPDATE: 'Updated a subject',
+  DELETED: 'Deleted a subject',
+  APPLY_LABEL: 'Applied a subject',
+});
+
 // REPORTS EVENTS
 export const REPORTS_EVENTS = Object.freeze({
   DOWNLOAD_REPORT: 'Downloaded a report',

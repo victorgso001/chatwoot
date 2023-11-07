@@ -14,6 +14,7 @@ const settings = accountId => ({
     'general_settings_index',
     'general_settings',
     'labels_list',
+    'subjects_list',
     'macros_edit',
     'macros_new',
     'macros_wrapper',
@@ -79,6 +80,14 @@ const settings = accountId => ({
       toState: frontendURL(`accounts/${accountId}/settings/labels/list`),
       toStateName: 'labels_list',
       featureFlag: FEATURE_FLAGS.LABELS,
+    },
+    {
+      icon: 'tag',
+      label: 'SUBJECTS',
+      hasSubMenu: false,
+      toState: frontendURL(`accounts/${accountId}/settings/subjects/list`),
+      toStateName: 'subjects_list',
+      featureFlag: FEATURE_FLAGS.SUBJECTS,
     },
     {
       icon: 'code',

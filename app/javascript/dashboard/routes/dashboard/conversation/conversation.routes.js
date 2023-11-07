@@ -65,6 +65,25 @@ export default {
       }),
     },
     {
+      path: frontendURL('accounts/:accountId/subject/:subject'),
+      name: 'subject_conversations',
+      roles: ['administrator', 'agent'],
+      component: ConversationView,
+      props: route => ({ label: route.params.subject }),
+    },
+    {
+      path: frontendURL(
+        'accounts/:accountId/subject/:subject/conversations/:conversation_id'
+      ),
+      name: 'conversations_through_subject',
+      roles: ['administrator', 'agent'],
+      component: ConversationView,
+      props: route => ({
+        conversationId: route.params.conversation_id,
+        label: route.params.subject,
+      }),
+    },
+    {
       path: frontendURL('accounts/:accountId/team/:teamId'),
       name: 'team_conversations',
       roles: ['administrator', 'agent'],

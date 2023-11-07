@@ -16,6 +16,7 @@ import goToCommandHotKeys from './goToCommandHotKeys';
 import appearanceHotKeys from './appearanceHotKeys';
 import agentMixin from 'dashboard/mixins/agentMixin';
 import conversationLabelMixin from 'dashboard/mixins/conversation/labelMixin';
+import conversationSubjectMixin from 'dashboard/mixins/conversation/subjectMixin';
 import conversationTeamMixin from 'dashboard/mixins/conversation/teamMixin';
 import adminMixin from 'dashboard/mixins/isAdmin';
 import { GENERAL_EVENTS } from '../../../helper/AnalyticsHelper/events';
@@ -26,6 +27,7 @@ export default {
     agentMixin,
     conversationHotKeysMixin,
     conversationLabelMixin,
+    conversationSubjectMixin,
     conversationTeamMixin,
     appearanceHotKeys,
     goToCommandHotKeys,

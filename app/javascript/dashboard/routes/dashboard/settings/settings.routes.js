@@ -17,6 +17,7 @@ import profile from './profile/profile.routes';
 import reports from './reports/reports.routes';
 import store from '../../../store';
 import teams from './teams/teams.routes';
+import subjects from './subjects/subjects.routes';
 
 export default {
   routes: [
@@ -44,6 +45,7 @@ export default {
     ...integrationapps.routes,
     ...integrations.routes,
     ...labels.routes,
+    ...subjects.routes,
     ...macros.routes,
     ...profile.routes,
     ...reports.routes,

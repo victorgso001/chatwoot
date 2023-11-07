@@ -77,6 +77,11 @@
       :title="$t('CONVERSATION_SIDEBAR.ACCORDION.CONVERSATION_LABELS')"
     />
     <conversation-labels :conversation-id="conversationId" />
+    <contact-details-item
+      compact
+      :title="$t('CONVERSATION_SIDEBAR.ACCORDION.CONVERSATION_SUBJECTS')"
+    />
+    <conversation-subjects :conversation-id="conversationId" />
   </div>
 </template>
 
@@ -86,6 +91,7 @@ import alertMixin from 'shared/mixins/alertMixin';
 import ContactDetailsItem from './ContactDetailsItem.vue';
 import MultiselectDropdown from 'shared/components/ui/MultiselectDropdown.vue';
 import ConversationLabels from './labels/LabelBox.vue';
+import ConversationSubjects from './subjects/SubjectBox.vue';
 import agentMixin from 'dashboard/mixins/agentMixin';
 import teamMixin from 'dashboard/mixins/conversation/teamMixin';
 import { CONVERSATION_PRIORITY } from '../../../../shared/constants/messages';
@@ -96,6 +102,7 @@ export default {
     ContactDetailsItem,
     MultiselectDropdown,
     ConversationLabels,
+    ConversationSubjects,
   },
   mixins: [agentMixin, alertMixin, teamMixin],
   props: {

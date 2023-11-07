@@ -27,6 +27,13 @@ module Api::V2::Accounts::ReportsHelper
     end
   end
 
+  def generate_subjects_report
+    Current.account.subjects.map do |subject|
+      subject_report = generate_report({ type: :subject, id: subject.id })
+      [subject.title] + generate_readable_report_metrics(subject_report)
+    end
+  end
+
   def generate_report(report_params)
     V2::ReportBuilder.new(
       Current.account,

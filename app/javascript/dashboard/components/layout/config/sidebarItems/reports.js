@@ -8,6 +8,7 @@ const reports = accountId => ({
     'csat_reports',
     'agent_reports',
     'label_reports',
+    'subject_reports',
     'inbox_reports',
     'team_reports',
   ],
@@ -46,6 +47,13 @@ const reports = accountId => ({
       hasSubMenu: false,
       toState: frontendURL(`accounts/${accountId}/reports/label`),
       toStateName: 'label_reports',
+    },
+    {
+      icon: 'tag',
+      label: 'REPORTS_SUBJECT',
+      hasSubMenu: false,
+      toState: frontendURL(`accounts/${accountId}/reports/subject`),
+      toStateName: 'subject_reports',
     },
     {
       icon: 'mail-inbox-all',

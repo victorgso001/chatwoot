@@ -63,6 +63,14 @@ const filterTypes = [
     attributeModel: 'standard',
   },
   {
+    attributeKey: 'subjects',
+    attributeI18nKey: 'SUBJECTS',
+    inputType: 'multi_select',
+    dataType: 'text',
+    filterOperators: OPERATOR_TYPES_2,
+    attributeModel: 'standard',
+  },
+  {
     attributeKey: 'browser_language',
     attributeI18nKey: 'BROWSER_LANGUAGE',
     inputType: 'search_select',
@@ -144,6 +152,10 @@ export const filterAttributeGroups = [
       {
         key: 'labels',
         i18nKey: 'LABELS',
+      },
+      {
+        key: 'subjects',
+        i18nKey: 'SUBJECTS',
       },
       {
         key: 'created_at',

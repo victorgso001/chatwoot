@@ -9,6 +9,7 @@ class Conversations::EventDataPresenter < SimpleDelegator
       inbox_id: inbox_id,
       messages: push_messages,
       labels: label_list,
+      subjects: subject_list,
       meta: push_meta,
       status: status,
       custom_attributes: custom_attributes,

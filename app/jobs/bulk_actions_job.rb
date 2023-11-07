@@ -16,6 +16,7 @@ class BulkActionsJob < ApplicationJob
 
   def bulk_update
     bulk_remove_labels
+    bulk_remove_subjects
     bulk_conversation_update
   end
 
@@ -23,6 +24,7 @@ class BulkActionsJob < ApplicationJob
     params = available_params(@params)
     records.each do |conversation|
       bulk_add_labels(conversation)
+      bulk_add_subjects(conversation)
       conversation.update(params) if params
     end
   end
@@ -30,6 +32,12 @@ class BulkActionsJob < ApplicationJob
   def bulk_remove_labels
     records.each do |conversation|
       remove_labels(conversation)
+    end
+  end
+
+  def bulk_remove_subjects
+    records.each do |conversation|
+      remove_subjects(conversation)
     end
   end
 
@@ -48,6 +56,17 @@ class BulkActionsJob < ApplicationJob
 
     labels = conversation.label_list - @params[:labels][:remove]
     conversation.update(label_list: labels)
+  end
+
+  def bulk_add_subjects(conversation)
+    conversation.add_subjects(@params[:subjects][:add]) if @params[:subjects] && @params[:subjects][:add]
+  end
+
+  def remove_subjects(conversation)
+    return unless @params[:subjects] && @params[:subjects][:remove]
+
+    subjects = conversation.subject_list - @params[:subjects][:remove]
+    conversation.update(subject_list: subjects)
   end
 
   def records_to_updated(ids)

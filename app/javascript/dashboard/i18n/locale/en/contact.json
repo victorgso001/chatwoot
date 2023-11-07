@@ -37,6 +37,22 @@
         "CREATE_LABEL": "Create new label"
       }
     },
+    "SUBJECTS": {
+      "CONTACT": {
+        "TITLE": "Contact Subjects",
+        "ERROR": "Couldn't update subjects"
+      },
+      "CONVERSATION": {
+        "TITLE": "Conversation Subjects",
+        "ADD_BUTTON": "Add Subjects"
+      },
+      "SUBJECT_SELECT": {
+        "TITLE": "Add Subjects",
+        "PLACEHOLDER": "Search subjects",
+        "NO_RESULT": "No subjects found",
+        "CREATE_SUBJECT": "Create new subject"
+      }
+    },
     "MERGE_CONTACT": "Merge contact",
     "CONTACT_ACTIONS": "Contact actions",
     "MUTE_CONTACT": "Mute Conversation",

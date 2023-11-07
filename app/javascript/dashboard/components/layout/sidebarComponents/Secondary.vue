@@ -19,6 +19,7 @@
         :key="menuItem.key"
         :menu-item="menuItem"
         @add-label="showAddLabelPopup"
+        @add-subject="showAddSubjectPopup"
       />
     </transition-group>
   </div>
@@ -41,6 +42,10 @@ export default {
       default: 0,
     },
     labels: {
+      type: Array,
+      default: () => [],
+    },
+    subjects: {
       type: Array,
       default: () => [],
     },
@@ -170,6 +175,52 @@ export default {
         })),
       };
     },
+    subjectSection() {
+      return {
+        icon: 'number-symbol',
+        label: 'SUBJECTS',
+        hasSubMenu: true,
+        newLink: this.showNewLink(FEATURE_FLAGS.TEAM_MANAGEMENT),
+        newLinkTag: 'NEW_SUBJECT',
+        key: 'subject',
+        toState: frontendURL(`accounts/${this.accountId}/settings/subjects`),
+        toStateName: 'subjects_list',
+        showModalForNewItem: true,
+        modalName: 'AddSubject',
+        children: this.subjects.map(subject => ({
+          id: subject.id,
+          label: subject.title,
+          color: subject.color,
+          truncateSubject: true,
+          toState: frontendURL(
+            `accounts/${this.accountId}/subject/${subject.title}`
+          ),
+        })),
+      };
+    },
+    contactSubjectSection() {
+      return {
+        icon: 'number-symbol',
+        label: 'TAGGED_WITH',
+        hasSubMenu: true,
+        key: 'subject',
+        newLink: this.showNewLink(FEATURE_FLAGS.TEAM_MANAGEMENT),
+        newLinkTag: 'NEW_SUBJECT',
+        toState: frontendURL(`accounts/${this.accountId}/settings/subjects`),
+        toStateName: 'subjects_list',
+        showModalForNewItem: true,
+        modalName: 'AddSubject',
+        children: this.subjects.map(subject => ({
+          id: subject.id,
+          label: subject.title,
+          color: subject.color,
+          truncateLabel: true,
+          toState: frontendURL(
+            `accounts/${this.accountId}/subjects/${subject.title}/contacts`
+          ),
+        })),
+      };
+    },
     teamSection() {
       return {
         icon: 'people-team',
@@ -246,6 +297,9 @@ export default {
   methods: {
     showAddLabelPopup() {
       this.$emit('add-label');
+    },
+    showAddSubjectPopup() {
+      this.$emit('add-subject');
     },
     toggleAccountModal() {
       this.$emit('toggle-accounts');

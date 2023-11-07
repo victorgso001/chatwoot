@@ -91,6 +91,51 @@
           </template>
         </multiselect>
       </div>
+      <div
+        v-else-if="type === 'subject'"
+        class="md:w-[240px] w-full multiselect-wrap--small"
+      >
+        <p class="text-xs mb-2 font-medium">
+          {{ $t('SUBJECT_REPORTS.FILTER_DROPDOWN_LABEL') }}
+        </p>
+        <multiselect
+          v-model="currentSelectedFilter"
+          :placeholder="multiselectLabel"
+          label="title"
+          track-by="id"
+          :options="filterItemsList"
+          :option-height="24"
+          :show-labels="false"
+          @input="changeFilterSelection"
+        >
+          <template slot="singleLabel" slot-scope="props">
+            <div class="reports-option__wrap">
+              <div
+                :style="{ backgroundColor: props.option.color }"
+                class="reports-option__rounded--item"
+              />
+              <span class="reports-option__desc">
+                <span class="reports-option__title">
+                  {{ props.option.title }}
+                </span>
+              </span>
+            </div>
+          </template>
+          <template slot="option" slot-scope="props">
+            <div class="reports-option__wrap">
+              <div
+                :style="{ backgroundColor: props.option.color }"
+                class="reports-option__rounded--item reports-option__item reports-option__label--swatch"
+              />
+              <span class="reports-option__desc">
+                <span class="reports-option__title">
+                  {{ props.option.title }}
+                </span>
+              </span>
+            </div>
+          </template>
+        </multiselect>
+      </div>
       <div v-else class="md:w-[240px] w-full multiselect-wrap--small">
         <p class="text-xs mb-2 font-medium">
           <template v-if="type === 'inbox'">
@@ -250,6 +295,7 @@ export default {
       const typeLabels = {
         agent: this.$t('AGENT_REPORTS.FILTER_DROPDOWN_LABEL'),
         label: this.$t('LABEL_REPORTS.FILTER_DROPDOWN_LABEL'),
+        subject: this.$t('SUBJECT_REPORTS.FILTER_DROPDOWN_LABEL'),
         inbox: this.$t('INBOX_REPORTS.FILTER_DROPDOWN_LABEL'),
         team: this.$t('TEAM_REPORTS.FILTER_DROPDOWN_LABEL'),
       };

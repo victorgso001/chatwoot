@@ -56,6 +56,7 @@ class Api::V1::AccountsController < Api::BaseController
   def get_cache_keys
     {
       label: fetch_value_for_key(params[:id], Label.name.underscore),
+      subject: fetch_value_for_key(params[:id], Subject.name.underscore),
       inbox: fetch_value_for_key(params[:id], Inbox.name.underscore),
       team: fetch_value_for_key(params[:id], Team.name.underscore)
     }

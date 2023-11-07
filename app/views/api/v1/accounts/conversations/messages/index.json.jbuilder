@@ -1,5 +1,6 @@
 json.meta do
   json.labels @conversation.label_list
+  json.subjects @conversation.subject_list
   json.additional_attributes @conversation.additional_attributes
   json.contact @conversation.contact.push_event_data
   json.assignee @conversation.assignee.push_event_data if @conversation.assignee.present?

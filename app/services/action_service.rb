@@ -31,6 +31,12 @@ class ActionService
     @conversation.reload.add_labels(labels)
   end
 
+  def add_subject(subjects)
+    return if subjects.empty?
+
+    @conversation.reload.add_subjects(subjects)
+  end
+
   def assign_agent(agent_ids = [])
     return @conversation.update!(assignee_id: nil) if agent_ids[0] == 'nil'
 
@@ -46,6 +52,13 @@ class ActionService
 
     labels = @conversation.label_list - labels
     @conversation.update(label_list: labels)
+  end
+
+  def remove_subject(subjects)
+    return if subjects.empty?
+
+    subjects = @conversation.subject_list - subjects
+    @conversation.update(subject_list: subjects)
   end
 
   def assign_team(team_ids = [])

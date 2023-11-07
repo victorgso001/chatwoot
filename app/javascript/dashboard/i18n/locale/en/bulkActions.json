@@ -28,6 +28,13 @@
       "ASSIGN_SUCCESFUL": "Labels assigned successfully",
       "ASSIGN_FAILED": "Failed to assign labels, please try again"
     },
+    "SUBJECTS": {
+      "ASSIGN_SUBJECTS": "Assign Subjects",
+      "NO_SUBJECTS_FOUND": "No subjects found for",
+      "ASSIGN_SELECTED_SUBJECTS": "Assign selected subjects",
+      "ASSIGN_SUCCESFUL": "Subjects assigned successfully",
+      "ASSIGN_FAILED": "Failed to assign subjects, please try again"
+    },
     "TEAMS": {
       "TEAM_SELECT_LABEL": "Select Team",
       "NONE": "None",

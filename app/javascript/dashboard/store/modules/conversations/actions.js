@@ -343,6 +343,11 @@ const actions = {
       data: conversation.labels,
     });
 
+    dispatch('conversationSubjects/setConversationSubject', {
+      id: conversation.id,
+      data: conversation.subjects,
+    });
+
     dispatch('contacts/setContact', sender);
   },
 

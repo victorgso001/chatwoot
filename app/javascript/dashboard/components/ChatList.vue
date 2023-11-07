@@ -123,6 +123,7 @@
       @assign-agent="onAssignAgent"
       @update-conversations="onUpdateConversations"
       @assign-labels="onAssignLabels"
+      @assign-subjects="onAssignSubjects"
       @assign-team="onAssignTeamsForBulk"
     />
     <div
@@ -135,6 +136,7 @@
           v-for="chat in conversationList"
           :key="chat.id"
           :active-label="label"
+          :active-subject="subject"
           :team-id="teamId"
           :folders-id="foldersId"
           :chat="chat"
@@ -146,6 +148,7 @@
           @assign-agent="onAssignAgent"
           @assign-team="onAssignTeam"
           @assign-label="onAssignLabels"
+          @assign-subject="onAssignSubjects"
           @update-conversation-status="toggleConversationStatus"
           @context-menu-toggle="onContextMenuToggle"
           @mark-as-unread="markAsUnread"
@@ -252,6 +255,10 @@ export default {
       type: String,
       default: '',
     },
+    subject: {
+      type: String,
+      default: '',
+    },
     conversationType: {
       type: String,
       default: '',
@@ -311,6 +318,7 @@ export default {
       inboxesList: 'inboxes/getInboxes',
       campaigns: 'campaigns/getAllCampaigns',
       labels: 'labels/getLabels',
+      subjects: 'subjects/getSubjects',
     }),
     hasAppliedFilters() {
       return this.appliedFilters.length !== 0;
@@ -401,6 +409,7 @@ export default {
         sortBy: this.activeSortBy,
         page: this.conversationListPagination,
         labels: this.label ? [this.label] : undefined,
+        subjects: this.subject ? [this.subject] : undefined,
         teamId: this.teamId || undefined,
         conversationType: this.conversationType || undefined,
         folders: this.hasActiveFolders ? this.savedFoldersValue : undefined,
@@ -409,7 +418,7 @@ export default {
     conversationListPagination() {
       const conversationsPerPage = 25;
       const isNoFiltersOrFoldersAndChatListNotEmpty =
-        !this.hasAppliedFiltersOrActiveFolders && this.chatsOnView !== [];
+        !this.hasAppliedFiltersOrActiveFolders && this.chatsOnView.length !== 0;
       const isUnderPerPage =
         this.chatsOnView.length < conversationsPerPage &&
         this.activeAssigneeTabCount < conversationsPerPage &&
@@ -432,6 +441,9 @@ export default {
       }
       if (this.label) {
         return `#${this.label}`;
+      }
+      if (this.subject) {
+        return `#${this.subject}`;
       }
       if (this.conversationType === 'mention') {
         return this.$t('CHAT_LIST.MENTION_HEADING');
@@ -502,6 +514,9 @@ export default {
       this.resetAndFetchData();
     },
     label() {
+      this.resetAndFetchData();
+    },
+    subject() {
       this.resetAndFetchData();
     },
     conversationType() {
@@ -585,6 +600,7 @@ export default {
         teams: this.teamsList,
         inboxes: this.inboxesList,
         labels: this.labels,
+        subjects: this.subjects,
         campaigns: this.campaigns,
         languages: languages,
         countries: countries,
@@ -829,7 +845,7 @@ export default {
           id: conversationId,
         });
         const {
-          params: { accountId, inbox_id: inboxId, label, teamId },
+          params: { accountId, inbox_id: inboxId, label, subject, teamId },
           name,
         } = this.$route;
         let conversationType = '';
@@ -845,6 +861,7 @@ export default {
             customViewId: this.foldersId,
             inboxId,
             label,
+            subject,
             teamId,
           })
         );
@@ -899,6 +916,33 @@ export default {
         }
       } catch (err) {
         this.showAlert(this.$t('BULK_ACTION.LABELS.ASSIGN_FAILED'));
+      }
+    },
+    async onAssignSubjects(subjects, conversationId = null) {
+      try {
+        await this.$store.dispatch('bulkActions/process', {
+          type: 'Conversation',
+          ids: conversationId || this.selectedConversations,
+          subjects: {
+            add: subjects,
+          },
+        });
+        this.selectedConversations = [];
+        if (conversationId) {
+          this.showAlert(
+            this.$t(
+              'CONVERSATION.CARD_CONTEXT_MENU.API.SUBJECT_ASSIGNMENT.SUCCESFUL',
+              {
+                subjectName: subjects[0],
+                conversationId,
+              }
+            )
+          );
+        } else {
+          this.showAlert(this.$t('BULK_ACTION.SUBJECTS.ASSIGN_SUCCESFUL'));
+        }
+      } catch (err) {
+        this.showAlert(this.$t('BULK_ACTION.SUBJECTS.ASSIGN_FAILED'));
       }
     },
     async onAssignTeamsForBulk(team) {

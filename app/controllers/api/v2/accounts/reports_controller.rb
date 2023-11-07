@@ -29,6 +29,11 @@ class Api::V2::Accounts::ReportsController < Api::V1::Accounts::BaseController
     generate_csv('labels_report', 'api/v2/accounts/reports/labels')
   end
 
+  def subjects
+    @report_data = generate_subjects_report
+    generate_csv('subjects_report', 'api/v2/accounts/reports/subjects')
+  end
+
   def teams
     @report_data = generate_teams_report
     generate_csv('teams_report', 'api/v2/accounts/reports/teams')

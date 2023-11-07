@@ -3,7 +3,7 @@ import { DATA_VERSION } from './version';
 
 export class DataManager {
   constructor(accountId) {
-    this.modelsToSync = ['inbox', 'label', 'team'];
+    this.modelsToSync = ['inbox', 'label', 'subject', 'team'];
     this.accountId = accountId;
     this.db = null;
   }
@@ -15,6 +15,7 @@ export class DataManager {
         db.createObjectStore('cache-keys');
         db.createObjectStore('inbox', { keyPath: 'id' });
         db.createObjectStore('label', { keyPath: 'id' });
+        db.createObjectStore('subject', { keyPath: 'id' });
         db.createObjectStore('team', { keyPath: 'id' });
       },
     });
